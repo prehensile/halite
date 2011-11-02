@@ -15,7 +15,7 @@ class URLHandlerSpotify():
 	
 	def __init__( self ):
 		Logger.log_message( "URLHandlerSpotify: New Spytify instance" )
-		self.sp_instance = spytify.Spytify( "prehensile", "d4mn3dsp0t", callback=self.spytify_callback )
+		self.sp_instance = spytify.Spytify( SP_USERNAME, SP_PASSWORD, callback=self.spytify_callback )
 		self.playing = False
 		self.router = None
 	
