@@ -1,0 +1,3 @@
+[submodule "halite/youtube-dl"]
+	path = halite/youtube-dl
+	url = git@github.com:prehensile/youtube-dl.git
