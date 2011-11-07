@@ -1,6 +1,5 @@
 import subprocess
 from halitewrappers import MPlayerWrapper
-import time
 from halitelogging import Logger
 from haliteconfig import HaliteConfig
 
@@ -20,8 +19,6 @@ class URLHandlerYouTube():
 		
 		youtube_process.terminate()
 		
-		time.sleep( 1 ) # prevent processes overlapping; give memory management a chance
-	
 	
 	def handles_url( self, url ):
 		return( "youtu" in url )

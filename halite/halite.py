@@ -1,22 +1,21 @@
 #!/usr/bin/env python
 
 import plistlib
-import random
 import os
 import re
+import subprocess
+import sys
+import listenercounter
 from halitespotify import URLHandlerSpotify
 from haliteyoutube import URLHandlerYouTube
 from halitewrappers import MPlayerWrapper
 from halitelogging import Logger
 from haliteconfig import HaliteConfig
-import subprocess
-import sys
-import listenercounter
+from haliteplaylist import PlaylistHandler
 
 config 			= HaliteConfig.default_config()
 PIDFILE 		= config.get("halite","pidfile")
 COMMANDFILE 	= config.get("halite","commandfile")
-MEDIA_ROOT 		= config.get("halite","media_root")
 
 
 class FileHandler():
@@ -83,8 +82,6 @@ class FileHandlerMediaFile():
 		
 def start():
 	
-	
-	
 	if( os.path.isfile(PIDFILE) ):
 		Logger.log_message( "There is already an instance of Halite running." )
 		exit()
@@ -95,13 +92,14 @@ def start():
 	
 	Logger.log_message( "Halite start, pid is %d" % os.getpid() )
 	
-	file_handlers	= [ 	FileHandlerMediaFile(),
+	file_handlers		= [ FileHandlerMediaFile(),
 							FileHandlerURL() ]
+	playlist_handler	= PlaylistHandler()
 	running = True
 	while running:
+		
 		# get a new file
-		files = os.listdir( MEDIA_ROOT )
-		file = random.choice( files )
+		file = playlist_handler.get_next_file()
 		(path, ext) = os.path.splitext(file)
 		
 		# play it
@@ -110,7 +108,7 @@ def start():
 			handled_extensions = file_handler.handled_extensions()
 			for handled_extension in handled_extensions:
 				if( handled_extension == ext ):
-					file_handler.handle_file( os.path.join( MEDIA_ROOT, file ) )
+					file_handler.handle_file( file )
 					handled = True
 				if( handled ):
 					break
