@@ -1,0 +1,273 @@
+/*
+ * halite
+ * ref: http://richardhallows.com/standards-and-conventions/
+ *
+ * colour swatch:
+ * black = #000
+ *
+ * index:
+ * 1. fonts
+ * 2. normalise html5
+ * 3. default styles (based on boilerplate/normalise)
+ * 4. helper classes (non-semantic)
+ * 5. shared states
+ * 6. style patterns
+ * 7. layout patterns (non-semantic)
+ * 8. @mediaqueries
+ */
+
+/* 1. fonts  */
+
+/* 2. normalise html5 */
+	/* corrects block display not defined in IE6/7/8/9 & FF3 */
+		article,
+		aside,
+		details,
+		figcaption,
+		figure,
+		footer,
+		header,
+		hgroup,
+		nav,
+		section {
+			display: block;
+		}
+
+/* 3. default styles (based on boilerplate/normalise) */
+	html {
+		font-size: 100%;
+		overflow-y: scroll;
+		-webkit-text-size-adjust: 100%; 
+		-ms-text-size-adjust: 100%; 
+	}
+	
+	body {
+		color: #000;	
+		background: #fff;
+		font-family: Helmet, Freesans, sans-serif;
+		line-height: 1.3;
+		max-width: 50em;
+		margin: 0 auto;
+		padding: 1em 5%;
+	}
+	
+	/* links */	
+		a,
+		a:visited {
+			color: #333;	
+			cursor: pointer;
+			text-decoration: none;
+			-webkit-transition: all 0.3s ease;
+			-moz-transition: all 0.3s ease;
+			-ms-transition: all 0.3s ease;
+			-o-transition: all 0.3s ease;
+			transition: all 0.3s ease;
+		}
+
+		a:hover,
+		a:active {
+			outline: 0;
+		}
+
+		a:hover,
+		a:focus { 
+			text-decoration: underline;
+		}
+		
+		a:focus {
+			outline: thin dotted;
+		}
+	
+		a:visited {
+			color: #fff;
+		}
+
+	/* heading content */
+		h1,
+		h2 {
+			margin: 0 0 0.5em 0;
+			font-family: Georgia, "Times New Roman", Times, serif;
+			font-size: 2em;
+			font-weight: normal;
+		}
+		
+		h2,
+		.beta {
+			font-size: 1.5em;
+		}
+
+	/* grouping content */
+		p {
+			margin: 0 0 1em 0;
+		}
+		
+		/* lists */
+			
+
+	/* embedding content */	
+		figure {
+			margin: 0;
+		}
+		
+		img {
+			border: 0;
+			-ms-interpolation-mode: bicubic;
+		}
+/* 4. helper classes (non-semantic) */
+	/* clearfix */
+		.clearfix:before,
+		.clearfix:after {
+			content: "";
+			display: table;
+		}
+
+		.clearfix:after {
+			clear: both;
+		}
+
+		.oldie .clearfix {
+			*zoom: 1;
+		}
+		
+	/* image replacement */
+		.image-replacement {
+			background-repeat: no-repeat;
+			display: block;
+			direction: ltr;
+			overflow: hidden;
+			text-align: left;
+			text-indent: -999em;
+		}
+		
+	/* inline-block */
+		.inline-block {
+			display: -moz-inline-box;
+			display: inline-block;
+			position: relative;
+		}
+		
+		.oldie .inline-block {
+			*display: inline;
+			*zoom: 1;
+		}
+		
+/* 5. shared states */
+	/* hidden */
+		.is-hidden,
+		[hidden] {
+			display: none;
+			visibility: hidden;
+		} 
+
+	/* hide only visually, but have it available for screenreaders */
+		.is-visually-hidden {
+			border: 0;
+			clip: rect(0 0 0 0);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px;
+		}
+
+		.is-visually-hidden.focusable:active,
+		.is-visually-hidden.focusable:focus {
+			clip: auto;
+			height: auto;
+			margin: 0;
+			overflow: visible;
+			position: static;
+			width: auto;
+		}
+
+	/* hide visually and from screenreaders, but maintain layout */
+		.is-invisible {
+			visibility: hidden;
+		}
+
+/* 6. style patterns */
+	.tracks {}
+		.tracks track{}
+		
+/* 8. @mediaqueries */
+	/* 1st design break point */
+		@media only screen and (min-width: 50em) {
+				
+			.primary-content {
+				float: left;
+				width: 60%;
+				margin-right: 5%;
+			}
+			
+			.secondary-content {
+				float: right;
+				width: 35%;
+			}
+		}
+	
+	/* print */
+		@media print {
+			* {
+				background: transparent !important;
+				color: black !important;
+				-moz-border-radius: 0 !important;
+				border-radius: 0 !important;
+				-webkit-box-shadow: none !important;
+				-moz-box-shadow: none !important;
+				box-shadow: none !important;
+				-ms-filter: none !important;
+				filter: none !important;
+				text-shadow: none !important;
+			}
+			
+			a, 
+			a:visited { 
+				color: #9c9c9c !important;
+				text-decoration: underline;
+			}
+			
+			a[href]:after {
+				content: " (" attr(href) ")";
+			}
+			
+			abbr[title]:after {
+				content: " (" attr(title) ")";
+			}
+			
+			.image-replacement a:after,
+			a[href^="javascript:"]:after,
+			a[href^="#"]:after {
+				content: "";
+			}
+			
+			pre,
+			blockquote {
+				page-break-inside: avoid;
+			}
+			
+			thead {
+				display: table-header-group;
+			}
+			
+			tr,
+			img {
+				page-break-inside: avoid;
+			}
+			
+			@page { 
+				margin: 0.5cm;
+			}
+			
+			p,
+			h2,
+			h3 {
+				orphans: 3;
+				widows: 3;
+			}
+			
+			h2,
+			h3 {
+				page-break-after: avoid;
+			}
+		}
